@@ -1,10 +1,10 @@
-
+// Add your combined JavaScript code here
 const addJobButton = document.getElementById("addJobButton");
 const addJobModal = document.getElementById("addJobModal");
 const closeButton = document.querySelector(".close");
 const addJobForm = document.getElementById("addJobForm");
-
-const BASE_URL = "http://localhost:3000"; // Update with your server URL
+//http://localhost:3000
+const BASE_URL = "file:///C:/Users/Vinay/OneDrive/Desktop/Sample-Fullstack/index.html"; // Update with your server URL
 
 addJobButton.addEventListener("click", () => {
   addJobModal.style.display = "block";
@@ -43,7 +43,7 @@ addJobForm.addEventListener("submit", async (event) => {
     }
 
     const data = await response.json();
-    console.log(data); // Handle the response as per your requirements
+    console.log("Job added:", data);
 
     // Clear the form inputs
     document.getElementById("companyName").value = "";
@@ -57,7 +57,7 @@ addJobForm.addEventListener("submit", async (event) => {
     // Fetch and display the updated job listings
     fetchJobListings();
   } catch (error) {
-    console.error(error);
+    console.error("Error adding job:", error);
     // Handle error if necessary
   }
 });
@@ -72,6 +72,7 @@ async function fetchJobListings() {
     }
 
     const jobListings = await response.json();
+    console.log("Job listings:", jobListings);
 
     // Clear the existing job listings on the page
     const jobListingsContainer = document.getElementById("jobListings");
@@ -89,12 +90,10 @@ async function fetchJobListings() {
       jobListingsContainer.appendChild(jobListingElement);
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching job listings:", error);
     // Handle error if necessary
   }
 }
 
 // Fetch job listings when the page loads
 window.addEventListener("load", fetchJobListings);
-
-
