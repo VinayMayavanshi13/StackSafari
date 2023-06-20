@@ -1,48 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Board</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Job Board</h1>
-    <!-- Navigation and other header elements -->
-  </header>
+  <h1>Job Board</h1>
+  <button id="addButton">Add</button>
 
-  <main>
-    <!-- Job listings, search form, etc. -->
-    
-    <button id="addJobButton">Add Job</button>
+  <div id="dialog" class="hidden">
+    <form id="jobForm">
+      <label for="companyName">Name of the Company:</label>
+      <input type="text" id="companyName" name="companyName" required>
 
-    <div id="addJobModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Add New Job</h2>
-        <form id="addJobForm">
-          <label for="companyName">Company Name:</label>
-          <input type="text" id="companyName" required>
+      <label for="role">Role:</label>
+      <input type="text" id="role" name="role" required>
 
-          <label for="position">Position:</label>
-          <input type="text" id="position" required>
+      <label for="workingHours">Working Hours:</label>
+      <input type="text" id="workingHours" name="workingHours" required>
 
-          <label for="workingHours">Working Hours:</label>
-          <input type="text" id="workingHours" required>
+      <label for="salary">Salary:</label>
+      <input type="text" id="salary" name="salary" required>
 
-          <label for="compensation">Compensation:</label>
-          <input type="text" id="compensation" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 
-          <button type="submit">Add Job</button>
-        </form>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2023 Job Board</p>
-  </footer>
+  <div id="jobList"></div>
 
   <script src="script.js"></script>
 </body>

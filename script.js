@@ -1,99 +1,40 @@
-// Add your combined JavaScript code here
-const addJobButton = document.getElementById("addJobButton");
-const addJobModal = document.getElementById("addJobModal");
-const closeButton = document.querySelector(".close");
-const addJobForm = document.getElementById("addJobForm");
-//http://localhost:3000
-const BASE_URL = "file:///C:/Users/Vinay/OneDrive/Desktop/Sample-Fullstack/index.html"; // Update with your server URL
+const addButton = document.getElementById('addButton');
+const dialog = document.getElementById('dialog');
+const jobForm = document.getElementById('jobForm');
+const jobList = document.getElementById('jobList');
 
-addJobButton.addEventListener("click", () => {
-  addJobModal.style.display = "block";
+addButton.addEventListener('click', () => {
+  dialog.classList.remove('hidden');
 });
 
-closeButton.addEventListener("click", () => {
-  addJobModal.style.display = "none";
-});
+jobForm.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-addJobForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
+  const companyName = document.getElementById('companyName').value;
+  const role = document.getElementById('role').value;
+  const workingHours = document.getElementById('workingHours').value;
+  const salary = document.getElementById('salary').value;
 
-  const companyName = document.getElementById("companyName").value;
-  const position = document.getElementById("position").value;
-  const workingHours = document.getElementById("workingHours").value;
-  const compensation = document.getElementById("compensation").value;
-
-  const jobData = {
+  const jobDetails = {
     companyName,
-    position,
+    role,
     workingHours,
-    compensation,
+    salary
   };
 
-  try {
-    const response = await fetch(`${BASE_URL}/jobs`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(jobData),
-    });
+  // Send the job details to the server using an HTTP request (e.g., fetch or Axios)
+  // After receiving a successful response, you can add the job details to the job list on the page
 
-    if (!response.ok) {
-      throw new Error("Failed to add job");
-    }
+  const jobItem = document.createElement('div');
+  jobItem.innerHTML = `
+    <h3>${companyName}</h3>
+    <p>Role: ${role}</p>
+    <p>Working Hours: ${workingHours}</p>
+    <p>Salary: ${salary}</p>
+  `;
 
-    const data = await response.json();
-    console.log("Job added:", data);
+  jobList.appendChild(jobItem);
 
-    // Clear the form inputs
-    document.getElementById("companyName").value = "";
-    document.getElementById("position").value = "";
-    document.getElementById("workingHours").value = "";
-    document.getElementById("compensation").value = "";
-
-    // Close the modal
-    addJobModal.style.display = "none";
-
-    // Fetch and display the updated job listings
-    fetchJobListings();
-  } catch (error) {
-    console.error("Error adding job:", error);
-    // Handle error if necessary
-  }
+  dialog.classList.add('hidden');
+  jobForm.reset();
 });
-
-// Fetch job listings and display them on the page
-async function fetchJobListings() {
-  try {
-    const response = await fetch(`${BASE_URL}/jobs`);
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch job listings");
-    }
-
-    const jobListings = await response.json();
-    console.log("Job listings:", jobListings);
-
-    // Clear the existing job listings on the page
-    const jobListingsContainer = document.getElementById("jobListings");
-    jobListingsContainer.innerHTML = "";
-
-    // Display job listings on the page
-    jobListings.forEach((job) => {
-      const jobListingElement = document.createElement("div");
-      jobListingElement.innerHTML = `
-        <h3>${job.companyName}</h3>
-        <p>Position: ${job.position}</p>
-        <p>Working Hours: ${job.workingHours}</p>
-        <p>Compensation: ${job.compensation}</p>
-      `;
-      jobListingsContainer.appendChild(jobListingElement);
-    });
-  } catch (error) {
-    console.error("Error fetching job listings:", error);
-    // Handle error if necessary
-  }
-}
-
-// Fetch job listings when the page loads
-window.addEventListener("load", fetchJobListings);
