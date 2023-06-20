@@ -1,3 +1,4 @@
+
 const addJobButton = document.getElementById("addJobButton");
 const addJobModal = document.getElementById("addJobModal");
 const closeButton = document.querySelector(".close");
@@ -72,9 +73,21 @@ async function fetchJobListings() {
 
     const jobListings = await response.json();
 
+    // Clear the existing job listings on the page
+    const jobListingsContainer = document.getElementById("jobListings");
+    jobListingsContainer.innerHTML = "";
+
     // Display job listings on the page
-    // You can update the DOM here with the job listings data
-    console.log(jobListings);
+    jobListings.forEach((job) => {
+      const jobListingElement = document.createElement("div");
+      jobListingElement.innerHTML = `
+        <h3>${job.companyName}</h3>
+        <p>Position: ${job.position}</p>
+        <p>Working Hours: ${job.workingHours}</p>
+        <p>Compensation: ${job.compensation}</p>
+      `;
+      jobListingsContainer.appendChild(jobListingElement);
+    });
   } catch (error) {
     console.error(error);
     // Handle error if necessary
@@ -83,4 +96,5 @@ async function fetchJobListings() {
 
 // Fetch job listings when the page loads
 window.addEventListener("load", fetchJobListings);
+
 
