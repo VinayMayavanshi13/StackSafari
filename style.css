@@ -10,9 +10,55 @@
     background-color: #fff;
     padding: 20px;
     border: 1px solid #ccc;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  #dialog form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #dialog label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  #dialog input {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  #dialog button {
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #dialog button:hover {
+    background-color: #45a049;
   }
   
   #jobList {
     margin-top: 20px;
+  }
+  
+  #jobList div {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  
+  #jobList h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  #jobList p {
+    margin: 5px 0;
+    font-size: 14px;
   }
   
